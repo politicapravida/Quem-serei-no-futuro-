@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quem serei no futuro?</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2l9.5 6.9-3.6 11.2H6.1L2.5 8.9z' fill='%2314213d'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#eef2f8;--card:#fff;--ink:#14213d;--muted:#55627a;--line:#d8e0ec;--tint:#e8eefa;--dot:#cdd6e6;--focus:#3b82f6;--btn:#14213d;--btn-ink:#fff;
+--c-analitico:#2f6fed;--c-criativo:#e0368a;--c-comunicativo:#f08c1a;--c-investigativo:#7a4ee0;--c-empreendedor:#12a05c;
+--shadow:0 1px 2px rgba(20,33,61,.06),0 18px 40px -18px rgba(20,33,61,.28)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1626;--card:#182139;--ink:#e9eef9;--muted:#9aa8c4;--line:#2b3757;--tint:#222e4d;--dot:#1f2a45;--focus:#8fb0ff;--btn:#dce6ff;--btn-ink:#0f1626;--shadow:0 1px 2px rgba(0,0,0,.4),0 18px 40px -18px rgba(0,0,0,.7)}}
+:root[data-theme="dark"]{--bg:#0f1626;--card:#182139;--ink:#e9eef9;--muted:#9aa8c4;--line:#2b3757;--tint:#222e4d;--dot:#1f2a45;--focus:#8fb0ff;--btn:#dce6ff;--btn-ink:#0f1626;--shadow:0 1px 2px rgba(0,0,0,.4),0 18px 40px -18px rgba(0,0,0,.7)}
+*{box-sizing:border-box}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100vh;color:var(--ink);background-color:var(--bg);background-image:radial-gradient(var(--dot) 1.2px,transparent 1.6px);background-size:24px 24px;font:1.05rem/1.6 "Avenir Next","Segoe UI","Helvetica Neue",Arial,system-ui,sans-serif}
+main{max-width:860px;margin:0 auto;padding:28px 16px 56px}
+h1,h2,h3,h4,p{margin:0}
+.muted{color:var(--muted)}.small{font-size:.92rem;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}
+.screen{display:none}.screen.active{display:block;animation:fade .45s ease}.hero.active{display:grid}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}}
+h1{font-size:clamp(2.4rem,7.2vw,3.7rem);line-height:1.02;font-weight:800;letter-spacing:-.035em;margin-bottom:18px}
+/* tela inicial */
+.hero{grid-template-columns:1.05fr .95fr;grid-template-areas:"txt art" "cta art";gap:8px 28px;padding:44px 40px;align-items:center}
+.hero-txt{grid-area:txt}.hero-art{grid-area:art}
+.hero-txt p{max-width:46ch;margin-bottom:12px}
+.hero-cta{grid-area:cta;margin-top:14px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+svg{display:block;width:100%;height:auto}
+/* botões */
+button{font:inherit;font-weight:700;cursor:pointer;border:0;border-radius:14px;padding:14px 26px;transition:transform .15s,background .2s,box-shadow .2s,opacity .2s}
+button:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.primary{background:var(--btn);color:var(--btn-ink);box-shadow:0 8px 18px -8px rgba(20,33,61,.6)}
+.primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 22px -8px rgba(20,33,61,.6)}
+.primary:disabled{opacity:.35;cursor:not-allowed;box-shadow:none}
+.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.ghost:hover:not(:disabled){background:var(--tint)}.ghost:disabled{opacity:.35;cursor:not-allowed}
+/* perguntas */
+.quiz{max-width:680px;margin:0 auto}
+.top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;font-size:.95rem}
+.top span{color:var(--muted)}
+.steps{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;margin-bottom:22px;align-items:center}
+.steps i{height:8px;border-radius:99px;background:var(--line);transition:background .35s,transform .35s}
+.steps i.done{background:var(--ink)}.steps i.now{transform:scaleY(1.7)}.steps i.now:not(.done){background:var(--muted)}
+.qcard{padding:32px 28px}
+.qcard.next{animation:inR .38s cubic-bezier(.2,.8,.2,1)}.qcard.prev{animation:inL .38s cubic-bezier(.2,.8,.2,1)}
+@keyframes inR{from{opacity:0;transform:translateX(28px)}}@keyframes inL{from{opacity:0;transform:translateX(-28px)}}
+h2{font-size:clamp(1.25rem,3.6vw,1.55rem);line-height:1.3;font-weight:700;letter-spacing:-.01em;margin-bottom:22px}
+.opts{display:grid;gap:12px}
+.opt{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:center;width:100%;text-align:left;font-weight:500;color:var(--ink);background:var(--card);padding:14px 16px;box-shadow:inset 0 0 0 1.5px var(--line)}
+.opt b{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:var(--tint);font-size:.95rem;transition:background .2s,color .2s,transform .25s}
+.opt:hover,.opt.sel{box-shadow:inset 0 0 0 2px var(--ink);background:var(--tint)}
+.opt.sel b{background:var(--ink);color:var(--card);transform:scale(1.1)}
+.opt:active{transform:scale(.99)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+/* resultado */
+.res{padding:36px 32px}.res h1{font-size:clamp(2rem,6vw,2.8rem);margin-bottom:10px}
+.lead{max-width:60ch;margin-bottom:22px}
+.res-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:20px 32px;align-items:center}
+.scores{display:grid;gap:14px}
+.row{display:grid;grid-template-columns:12px 108px 1fr 26px;gap:10px;align-items:center;font-size:.98rem;opacity:.72}
+.row.top{opacity:1;font-weight:700}.row i{width:12px;height:12px;border-radius:50%}.row strong{text-align:right}
+.track{height:14px;background:var(--line);border-radius:99px;overflow:hidden}
+.fill{height:100%;width:0;border-radius:99px;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.profiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin:18px 0}
+.pcard{position:relative;overflow:hidden;padding:30px 24px 26px}
+.pcard::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:var(--pc)}
+.phead{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.badge{flex:0 0 48px;height:48px;border-radius:16px;background:var(--pc);display:grid;place-items:center}
+.badge svg{width:26px;height:26px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+h3{font-size:1.35rem;line-height:1.15;font-weight:800;letter-spacing:-.02em}
+.pts{font-size:.9rem;color:var(--muted)}
+h4{font-size:.95rem;font-weight:700;margin:16px 0 8px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-size:.88rem;line-height:1.2;padding:6px 12px;border-radius:99px;background:var(--tint);box-shadow:inset 0 0 0 1px var(--line);background:color-mix(in srgb,var(--pc) 15%,var(--card));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--pc) 40%,transparent)}
+.tag.area{background:transparent;box-shadow:inset 0 0 0 1px var(--line)}
+.dots{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.dots li{position:relative;padding-left:18px;font-size:.97rem}
+.dots li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--pc)}
+.note{font-size:.92rem;color:var(--muted);max-width:64ch;margin:8px 0 20px}
+/* gráficos SVG */
+.ln{fill:none;stroke:var(--line);stroke-width:1.5}
+.draw{fill:none;stroke:var(--ink);stroke-width:2.5;stroke-linejoin:round;stroke-dasharray:640;stroke-dashoffset:640;animation:draw 1.5s .1s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.pop{animation:pop .5s cubic-bezier(.3,1.6,.5,1) both;transform-box:fill-box;transform-origin:center}
+@keyframes pop{from{opacity:0;transform:scale(.3)}}
+.grow{animation:grow 1s cubic-bezier(.2,.8,.2,1) both;transform-origin:230px 165px}
+@keyframes grow{from{opacity:0;transform:scale(0)}}
+.lbl{font:700 15px "Avenir Next","Segoe UI",Arial,sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:5px;stroke-linejoin:round}
+.lbl.v{font-weight:500;fill:var(--muted)}
+@media(max-width:720px){
+.hero{grid-template-columns:1fr;grid-template-areas:"txt" "art" "cta";padding:30px 20px}.hero-art{max-width:340px;margin:0 auto}
+.res{padding:26px 18px}.res-grid{grid-template-columns:1fr}.qcard{padding:24px 18px}
+.row{grid-template-columns:12px 92px 1fr 22px;font-size:.92rem}.nav button{flex:1}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.draw{stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+<main>
+
+<section id="inicio" class="screen active card hero">
+  <div class="hero-txt">
+    <h1>Quem serei no futuro?</h1>
+    <p>Você vai passar por 10 situações do dia a dia, como trabalhos escolares, imprevistos e ideias novas, e escolher o que faria em cada uma. No final, o teste mostra quais habilidades aparecem com mais força nas suas escolhas.</p>
+    <p class="muted">Não existe resposta certa ou errada. O resultado mostra tendências e possibilidades, não uma profissão definitiva. Nada é salvo: tudo acontece no seu navegador.</p>
+  </div>
+  <div class="hero-art" id="heroArt"></div>
+  <div class="hero-cta"><button class="primary" id="btnComecar">Começar teste</button><span class="small">Leva cerca de 3 minutos.</span></div>
+</section>
+
+<section id="quiz" class="screen quiz">
+  <div class="top"><b id="pTexto">Pergunta 1 de 10</b><span id="pResp">0 respondidas</span></div>
+  <div class="steps" id="steps" role="progressbar" aria-label="Progresso do teste" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"></div>
+  <div class="card qcard" id="cardPergunta">
+    <h2 id="enunciado"></h2>
+    <div class="opts" id="opcoes"></div>
+    <div class="nav"><button class="ghost" id="btnVoltar">Voltar</button><button class="primary" id="btnProx">Próxima</button></div>
+  </div>
+</section>
+
+<section id="resultado" class="screen">
+  <div class="card res">
+    <h1>Seu resultado</h1>
+    <p class="lead muted" id="resIntro"></p>
+    <div class="res-grid"><div id="radar"></div><div class="scores" id="placar"></div></div>
+  </div>
+  <div class="profiles" id="perfisDestaque"></div>
+  <p class="note">Este teste é um ponto de partida para refletir. Ele não é diagnóstico e não define quem você será. Habilidades mudam e crescem com a prática, e você pode ter interesse em várias áreas ao mesmo tempo.</p>
+  <button class="primary" id="btnRefazer">Refazer teste</button>
+</section>
+
+</main>
+<script>
+/* ---------- 1. PERFIS ---------- */
+const PERFIS = {
+  analitico:{nome:"Analítico",cor:"var(--c-analitico)",
+    desc:"Você tende a organizar as informações, procurar padrões e buscar uma lógica antes de decidir.",
+    habilidades:["Raciocínio lógico","Organização de dados","Planejamento por etapas","Resolução estruturada de problemas"],
+    desenvolver:["Aceitar que nem tudo precisa estar 100% definido para começar","Experimentar ideias mais livres e intuitivas"],
+    areas:["Análise de dados","Engenharia","Finanças e contabilidade","Programação","Logística"]},
+  criativo:{nome:"Criativo",cor:"var(--c-criativo)",
+    desc:"Você costuma imaginar caminhos diferentes e gosta de dar forma nova às ideias.",
+    habilidades:["Imaginação","Pensamento inovador","Sensibilidade visual","Flexibilidade diante de imprevistos"],
+    desenvolver:["Transformar ideias em passos concretos","Testar as ideias com dados ou opiniões de outras pessoas"],
+    areas:["Design","Publicidade","Produção audiovisual","Arquitetura","Desenvolvimento de jogos"]},
+  comunicativo:{nome:"Comunicativo",cor:"var(--c-comunicativo)",
+    desc:"Você valoriza o diálogo, percebe como as pessoas se sentem e costuma aproximar o grupo.",
+    habilidades:["Empatia","Trabalho em equipe","Expressão de ideias","Mediação de conflitos"],
+    desenvolver:["Registrar decisões por escrito para dar clareza","Sustentar sua opinião mesmo quando o grupo discorda"],
+    areas:["Educação","Psicologia","Jornalismo","Recursos humanos","Atendimento e relações públicas"]},
+  investigativo:{nome:"Investigativo",cor:"var(--c-investigativo)",
+    desc:"Você é curioso, observa com atenção e prefere entender bem antes de agir.",
+    habilidades:["Curiosidade","Pesquisa","Observação atenta","Teste de hipóteses"],
+    desenvolver:["Definir um prazo para parar de pesquisar e agir","Compartilhar o que descobre de forma simples"],
+    areas:["Ciências","Pesquisa acadêmica","Saúde","Jornalismo investigativo","Perícia e auditoria"]},
+  empreendedor:{nome:"Empreendedor",cor:"var(--c-empreendedor)",
+    desc:"Você toma iniciativa, organiza o grupo e gosta de transformar ideias em projetos reais.",
+    habilidades:["Iniciativa","Liderança","Planejamento","Persistência para tirar projetos do papel"],
+    desenvolver:["Ouvir mais o grupo antes de decidir","Dividir tarefas e confiar nas outras pessoas"],
+    areas:["Negócios e startups","Gestão de projetos","Produção de eventos","Marketing","Organizações sociais"]}
+};
+const ORDEM = ["analitico","criativo","comunicativo","investigativo","empreendedor"];
+
+/* ---------- 2. PERGUNTAS + TABELA DE PONTUAÇÃO ----------
+   Cada alternativa tem texto e UM perfil (cada resposta = 1 ponto). */
+const PERGUNTAS = [
+ {q:"Você recebe um trabalho escolar sobre um assunto que nunca estudou. Como você começa?",
+  o:[["Listo o que preciso entregar, divido em etapas e defino prazos.","analitico"],
+     ["Imagino um formato diferente e chamativo para apresentar o tema.","criativo"],
+     ["Converso com colegas e professores para entender o que eles sabem.","comunicativo"],
+     ["Pesquiso em várias fontes até entender bem o assunto.","investigativo"]]},
+ {q:"Sua equipe está com dificuldade de terminar um projeto a poucos dias da entrega. Como você ajuda?",
+  o:[["Analiso o que falta e reorganizo o tempo de cada tarefa.","analitico"],
+     ["Proponho uma ideia nova que simplifique o resultado final.","criativo"],
+     ["Reúno todo mundo, escuto os problemas e alinho as expectativas.","comunicativo"],
+     ["Assumo a coordenação, distribuo tarefas e acompanho o andamento.","empreendedor"]]},
+ {q:"Você percebe que algo na sua escola poderia funcionar melhor, como a organização do intervalo. Qual sua atitude?",
+  o:[["Observo por alguns dias para entender a causa real do problema.","investigativo"],
+     ["Crio uma proposta e começo a mobilizar colegas para colocá-la em prática.","empreendedor"],
+     ["Converso com alunos e funcionários para ouvir diferentes opiniões.","comunicativo"],
+     ["Desenho uma solução original e diferente do que já existe.","criativo"]]},
+ {q:"No meio de uma apresentação, o projetor para de funcionar. O que você faz primeiro?",
+  o:[["Avalio rapidamente as opções possíveis e escolho a mais viável.","analitico"],
+     ["Improviso uma forma diferente de apresentar, usando o quadro ou a fala.","criativo"],
+     ["Tranquilizo o grupo e explico a situação para a turma com calma.","comunicativo"],
+     ["Testo possíveis causas, como cabo, tomada e configuração.","investigativo"]]},
+ {q:"Você recebeu uma tabela com notas de vários simulados da turma. O que chama sua atenção?",
+  o:[["Comparar os números e achar padrões, médias e variações.","analitico"],
+     ["Pensar em um gráfico ou infográfico bem bonito para mostrar os dados.","criativo"],
+     ["Imaginar como usar esses dados para criar um grupo de estudos.","empreendedor"],
+     ["Querer descobrir por que alguns resultados foram tão diferentes.","investigativo"]]},
+ {q:"Dois colegas do seu grupo discordam sobre como fazer o trabalho e isso está travando tudo. Qual sua reação?",
+  o:[["Escuto os dois e ajudo cada um a entender o ponto de vista do outro.","comunicativo"],
+     ["Levanto prós e contras de cada ideia para decidir de forma lógica.","analitico"],
+     ["Sugiro juntar as duas ideias em uma terceira, mais interessante.","criativo"],
+     ["Defino um plano, escolho um caminho e peço que todos sigam.","empreendedor"]]},
+ {q:"Você tem uma ideia de evento beneficente na escola. Qual seria seu primeiro passo?",
+  o:[["Montar um plano com objetivos, orçamento e cronograma.","empreendedor"],
+     ["Pesquisar eventos parecidos que deram certo ou errado.","investigativo"],
+     ["Imaginar o tema, a identidade visual e o clima do evento.","criativo"],
+     ["Convidar pessoas e conversar sobre a ideia para ganhar apoio.","comunicativo"]]},
+ {q:"Um aplicativo que você usa todo dia começa a travar. O que você faz?",
+  o:[["Repito o erro, observo quando acontece e busco a causa.","investigativo"],
+     ["Procuro informações e tutoriais e sigo um passo a passo lógico.","analitico"],
+     ["Peço ajuda a alguém que entenda mais e aprendo com a conversa.","comunicativo"],
+     ["Penso em como eu mesmo faria um aplicativo melhor.","empreendedor"]]},
+ {q:"Seu grupo ganhou liberdade total para escolher o tema de um projeto. Como você contribui?",
+  o:[["Levo ideias originais que ninguém pensou ainda.","criativo"],
+     ["Comparo os temas com critérios como tempo, material e dificuldade.","analitico"],
+     ["Facilito a conversa para que todos opinem e cheguem a um acordo.","comunicativo"],
+     ["Pesquiso quais temas têm mais conteúdo e novidades para explorar.","investigativo"]]},
+ {q:"Você quer juntar dinheiro para uma viagem ou um objetivo importante. Qual seu jeito de agir?",
+  o:[["Calculo quanto preciso e crio um plano mensal para chegar lá.","analitico"],
+     ["Penso em uma forma de gerar renda, como vender algo ou oferecer um serviço.","empreendedor"],
+     ["Pesquiso o que outras pessoas fizeram para conseguir o mesmo objetivo.","investigativo"],
+     ["Crio um produto ou uma ideia diferente que as pessoas queiram comprar.","criativo"]]}
+];
+
+/* ---------- 3. ESTADO ---------- */
+let atual=0;
+let respostas=new Array(PERGUNTAS.length).fill(null); // índice da alternativa escolhida em cada pergunta
+const $=id=>document.getElementById(id);
+function mostrar(tela){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  $(tela).classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+const totalRespondidas=()=>respostas.filter(r=>r!==null).length;
+
+/* ---------- 4. GRÁFICOS (SVG gerado por JavaScript) ---------- */
+const ICONES={
+  analitico:'<path d="M5 20V11M12 20V4M19 20v-6"/>',
+  criativo:'<path d="M12 3l2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2z"/>',
+  comunicativo:'<path d="M4 5h16v11H9l-5 4z"/>',
+  investigativo:'<circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/>',
+  empreendedor:'<path d="M6 21V4M6 5h12l-3 4 3 4H6"/>'
+};
+const svgIcone=k=>'<svg viewBox="0 0 24 24" aria-hidden="true">'+ICONES[k]+'</svg>';
+const CX=230,CY=165;
+const vx=(i,r)=>{const a=(-90+i*72)*Math.PI/180;return [CX+r*Math.cos(a),CY+r*Math.sin(a)]}; // vértice i do pentágono
+const pts2s=a=>a.map(p=>p.map(n=>n.toFixed(1)).join(",")).join(" ");
+const poly=r=>pts2s(ORDEM.map((_,i)=>vx(i,r)));
+const plural=n=>n+(n===1?" ponto":" pontos");
+
+function desenharHero(){
+  const R=96;
+  let s='<svg viewBox="0 0 460 300" role="img" aria-label="Os cinco perfis do teste: analítico, criativo, comunicativo, investigativo e empreendedor">';
+  [32,64].forEach(r=>s+='<polygon class="ln" points="'+poly(r)+'"/>');
+  ORDEM.forEach((k,i)=>{const [x,y]=vx(i,R);s+='<line class="ln" x1="'+CX+'" y1="'+CY+'" x2="'+x.toFixed(1)+'" y2="'+y.toFixed(1)+'"/>'});
+  s+='<polygon class="draw" points="'+poly(R)+'"/>';
+  ORDEM.forEach((k,i)=>{
+    const [x,y]=vx(i,R),ly=i===0?y-34:y+42;
+    s+='<g class="pop" style="animation-delay:'+(.5+i*.12)+'s"><circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="22" style="fill:'+PERFIS[k].cor+'"/>'+
+       '<g fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="translate('+(x-11).toFixed(1)+' '+(y-11).toFixed(1)+') scale(.92)">'+ICONES[k]+'</g></g>'+
+       '<text class="lbl" x="'+x.toFixed(1)+'" y="'+ly.toFixed(1)+'" text-anchor="middle">'+PERFIS[k].nome+'</text>';
+  });
+  $("heroArt").innerHTML=s+'</svg>';
+}
+
+function desenharRadar(pts,destaque,topo){
+  const R=96;
+  let s='<svg viewBox="0 0 460 310" role="img" aria-label="Gráfico radar com a pontuação dos cinco perfis">';
+  [.25,.5,.75,1].forEach(f=>s+='<polygon class="ln" points="'+poly(R*f)+'"/>');
+  ORDEM.forEach((k,i)=>{const [x,y]=vx(i,R);s+='<line class="ln" x1="'+CX+'" y1="'+CY+'" x2="'+x.toFixed(1)+'" y2="'+y.toFixed(1)+'"/>'});
+  const dados=ORDEM.map((k,i)=>vx(i,R*pts[k]/topo));
+  s+='<g class="grow"><polygon points="'+pts2s(dados)+'" fill="var(--ink)" fill-opacity=".14" stroke="var(--ink)" stroke-width="2.5" stroke-linejoin="round"/>';
+  ORDEM.forEach((k,i)=>{s+='<circle cx="'+dados[i][0].toFixed(1)+'" cy="'+dados[i][1].toFixed(1)+'" r="'+(destaque.includes(k)?9:6)+'" style="fill:'+PERFIS[k].cor+'" stroke="var(--card)" stroke-width="3"/>'});
+  s+='</g>';
+  ORDEM.forEach((k,i)=>{
+    const [x,y]=vx(i,R+20),anc=i===0?"middle":(i<3?"start":"end"),ny=y+(i===0?-18:(i===1||i===4)?4:14);
+    s+='<text class="lbl" x="'+x.toFixed(1)+'" y="'+ny.toFixed(1)+'" text-anchor="'+anc+'">'+PERFIS[k].nome+'</text>'+
+       '<text class="lbl v" x="'+x.toFixed(1)+'" y="'+(ny+17).toFixed(1)+'" text-anchor="'+anc+'">'+plural(pts[k])+'</text>';
+  });
+  $("radar").innerHTML=s+'</svg>';
+}
+
+/* ---------- 5. PERGUNTAS ---------- */
+const passos=$("steps");
+PERGUNTAS.forEach(()=>passos.appendChild(document.createElement("i")));
+
+function atualizar(){
+  const n=totalRespondidas(),ultima=atual===PERGUNTAS.length-1;
+  document.querySelectorAll(".opt").forEach((b,i)=>{
+    const s=respostas[atual]===i;
+    b.classList.toggle("sel",s);b.setAttribute("aria-pressed",s);
+    b.firstChild.textContent=s?"✓":"ABCD"[i];
+  });
+  $("pTexto").textContent="Pergunta "+(atual+1)+" de "+PERGUNTAS.length;
+  $("pResp").textContent=n+(n===1?" respondida":" respondidas");
+  [...passos.children].forEach((el,i)=>{el.classList.toggle("done",respostas[i]!==null);el.classList.toggle("now",i===atual)});
+  passos.setAttribute("aria-valuenow",n);
+  $("btnVoltar").disabled=atual===0;
+  $("btnProx").textContent=ultima?"Ver meu resultado":"Próxima";
+  $("btnProx").disabled=respostas[atual]===null||(ultima&&n<PERGUNTAS.length);
+}
+
+function renderPergunta(direcao){
+  $("enunciado").textContent=PERGUNTAS[atual].q;
+  const box=$("opcoes");box.innerHTML="";
+  PERGUNTAS[atual].o.forEach((alt,i)=>{
+    const b=document.createElement("button");
+    b.type="button";b.className="opt";
+    b.innerHTML="<b></b><span></span>";
+    b.lastChild.textContent=alt[0];
+    b.addEventListener("click",()=>{respostas[atual]=i;atualizar()});
+    box.appendChild(b);
+  });
+  atualizar();
+  const c=$("cardPergunta");c.className="card qcard";void c.offsetWidth;c.classList.add(direcao);
+}
+
+$("btnComecar").addEventListener("click",()=>{atual=0;mostrar("quiz");renderPergunta("next")});
+$("btnVoltar").addEventListener("click",()=>{if(atual>0){atual--;renderPergunta("prev")}});
+$("btnProx").addEventListener("click",()=>{
+  if(respostas[atual]===null)return;
+  if(atual<PERGUNTAS.length-1){atual++;renderPergunta("next")}
+  else if(totalRespondidas()===PERGUNTAS.length)mostrarResultado();
+});
+
+/* ---------- 6. RESULTADO ---------- */
+function calcularPontos(){
+  const pts={};ORDEM.forEach(k=>pts[k]=0);
+  respostas.forEach((r,qi)=>{if(r!==null)pts[PERGUNTAS[qi].o[r][1]]++});
+  return pts;
+}
+/* Regra: se 2 ou mais perfis empatam na maior pontuação, todos ficam em destaque.
+   Se há um único líder, o perfil com a segunda maior pontuação também aparece (com seus empates). */
+function perfisDestaque(pts){
+  const v=[...new Set(ORDEM.map(k=>pts[k]))].sort((a,b)=>b-a);
+  const lideres=ORDEM.filter(k=>pts[k]===v[0]);
+  if(lideres.length>=2)return{lista:lideres,empate:true};
+  return{lista:lideres.concat(ORDEM.filter(k=>pts[k]===v[1])),empate:false};
+}
+const tags=(a,c)=>'<div class="tags">'+a.map(x=>'<span class="tag '+c+'">'+x+'</span>').join("")+'</div>';
+
+function mostrarResultado(){
+  const pts=calcularPontos(),d=perfisDestaque(pts);
+  const topo=Math.max(4,...ORDEM.map(k=>pts[k]));
+  desenharRadar(pts,d.lista,topo);
+
+  const placar=$("placar");placar.innerHTML="";
+  [...ORDEM].sort((a,b)=>pts[b]-pts[a]).forEach((k,i)=>{
+    const r=document.createElement("div");r.className="row"+(d.lista.includes(k)?" top":"");
+    r.innerHTML='<i style="background:'+PERFIS[k].cor+'"></i><span>'+PERFIS[k].nome+'</span><div class="track"><div class="fill" style="background:'+PERFIS[k].cor+'"></div></div><strong>'+pts[k]+'</strong>';
+    placar.appendChild(r);
+    const f=r.querySelector(".fill");
+    setTimeout(()=>{f.style.width=(pts[k]/topo*100)+"%"},150+i*90);
+  });
+
+  const nomes=d.lista.map(k=>PERFIS[k].nome);
+  const juntar=a=>a.length>1?a.slice(0,-1).join(", ")+" e "+a[a.length-1]:a[0];
+  $("resIntro").textContent=d.empate
+    ? "Suas respostas ficaram equilibradas: houve empate entre "+juntar(nomes)+". Nenhum deles é “melhor” que o outro, todos aparecem com a mesma força."
+    : "Nas suas escolhas, os perfis que mais apareceram foram "+juntar(nomes)+". Veja abaixo o que isso pode indicar.";
+
+  $("perfisDestaque").innerHTML=d.lista.map(k=>{
+    const p=PERFIS[k];
+    return '<article class="card pcard" style="--pc:'+p.cor+'"><div class="phead"><div class="badge">'+svgIcone(k)+'</div><div><h3>'+p.nome+'</h3><span class="pts">'+plural(pts[k])+'</span></div></div>'+
+      '<p>'+p.desc+'</p><h4>Principais habilidades</h4>'+tags(p.habilidades,"")+
+      '<h4>Pontos que podem ser desenvolvidos</h4><ul class="dots">'+p.desenvolver.map(x=>'<li>'+x+'</li>').join("")+'</ul>'+
+      '<h4>Atividades e áreas relacionadas, apenas como exemplos</h4>'+tags(p.areas,"area")+'</article>';
+  }).join("");
+  mostrar("resultado");
+}
+
+/* ---------- 7. REINICIAR ---------- */
+$("btnRefazer").addEventListener("click",()=>{
+  respostas.fill(null);atual=0;
+  $("placar").innerHTML="";$("perfisDestaque").innerHTML="";$("radar").innerHTML="";
+  desenharHero();mostrar("inicio");
+});
+
+desenharHero();
+</script>
+</body>
+</html>
